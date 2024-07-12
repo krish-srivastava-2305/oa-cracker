@@ -1,4 +1,4 @@
-import { DBConnect } from "@/app/lib/DBconnect";
+import { DBConnect } from "@/lib/DBconnect";
 import UserModel from "@/models/user.model";
 import bcrypt from "bcrypt"
 import { NextRequest, NextResponse } from "next/server";
