@@ -8,15 +8,13 @@ import { useRouter } from "next/navigation";
 
 type userDataObject = {
   username: string;
-  email: string;
   password: string;
 };
 
 export default function Form(): JSX.Element {
   const [userData, setUserData] = useState<userDataObject>({
     username: "",
-    email: "",
-    password: "",
+    password: ""
   });
 
   const router = useRouter();
@@ -24,8 +22,8 @@ export default function Form(): JSX.Element {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/users/signup",userData);
-      router.push('/signin')
+      const res = await axios.post("/api/users/signin",userData);
+      router.push('/')
     } catch (error) {
       console.error("Sign-up failed:", error);
     }
@@ -38,7 +36,7 @@ export default function Form(): JSX.Element {
         Welcome to OA Cracker
       </h2>
       <p className="text-white text-sm max-w-sm mt-2 dark:text-black">
-        SignUp to start testing yourself!!
+        SignIn to start testing yourself!!
       </p>
 
       <form className="my-8" onSubmit={handleSubmit}>
@@ -55,7 +53,7 @@ export default function Form(): JSX.Element {
             />
           </LabelInputContainer>
         </div>
-        <LabelInputContainer className="mb-4">
+        {/* <LabelInputContainer className="mb-4">
           <Label htmlFor="email" className="text-white">Email Address</Label>
           <Input
             id="email"
@@ -65,7 +63,7 @@ export default function Form(): JSX.Element {
               setUserData({ ...userData, email: e.target.value })
             }
           />
-        </LabelInputContainer>
+        </LabelInputContainer> */}
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password" className="text-white">Password</Label>
           <Input
@@ -81,7 +79,7 @@ export default function Form(): JSX.Element {
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
         >
-          Sign up &rarr;
+          Sign In &rarr;
           <BottomGradient />
         </button>
 

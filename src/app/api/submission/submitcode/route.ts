@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
-import { problems } from '@/problems/problemData';
 import { problemFinder } from '@/helper/problemFinder';
 
 export const POST = async (req: NextRequest)=>{

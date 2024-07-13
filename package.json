@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.0",
+    "@tabler/icons-react": "^3.10.0",
     "@types/jsonwebtoken": "^9.0.6",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",

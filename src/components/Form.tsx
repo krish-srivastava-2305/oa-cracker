@@ -1,39 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import axios from "axios"
 
-type userDataObject = {
-  username: string;
-  email: string;
-  password: string;
-};
-
-export default function Form(): JSX.Element {
-  const [userData, setUserData] = useState<userDataObject>({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+export default function Form() : React.ReactNode {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("/api/users/signup",userData);
-      router.push('/signin')
-    } catch (error) {
-      console.error("Sign-up failed:", error);
-    }
+    console.log(e)
+    useEffect(()=>{
+        const signUp = async () => {
+            // const res = await axios.post("/api/users/signup", {})
+        }
+    },[])
   };
-
   return (
-    <div className="h-full w-full flex justify-center items-end py-16">
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-gray-950 dark:bg-white">
+    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-gray-950 dark:bg-white">
       <h2 className="font-bold text-xl text-white dark:text-black">
         Welcome to OA Cracker
       </h2>
@@ -44,39 +27,31 @@ export default function Form(): JSX.Element {
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
-            <Label htmlFor="username" className="text-white">UserName</Label>
-            <Input
-              id="username"
-              placeholder="Tyler"
-              type="text"
-              onChange={(e) =>
-                setUserData({ ...userData, username: e.target.value })
-              }
-            />
+            <Label htmlFor="username">UserName</Label>
+            <Input id="username" placeholder="Tyler" type="text" />
           </LabelInputContainer>
+          {/* <LabelInputContainer>
+            <Label htmlFor="lastname">Last name</Label>
+            <Input id="lastname" placeholder="Durden" type="text" />
+          </LabelInputContainer> */}
         </div>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email" className="text-white">Email Address</Label>
-          <Input
-            id="email"
-            placeholder="projectmayhem@fc.com"
-            type="email"
-            onChange={(e) =>
-              setUserData({ ...userData, email: e.target.value })
-            }
-          />
+          <Label htmlFor="email">Email Address</Label>
+          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="password" className="text-white">Password</Label>
-          <Input
-            id="password"
-            placeholder="••••••••"
-            type="password"
-            onChange={(e) =>
-              setUserData({ ...userData, password: e.target.value })
-            }
-          />
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" placeholder="••••••••" type="password" />
         </LabelInputContainer>
+        {/* <LabelInputContainer className="mb-8">
+          <Label htmlFor="twitterpassword">Your twitter password</Label>
+          <Input
+            id="twitterpassword"
+            placeholder="••••••••"
+            type="twitterpassword"
+          />
+        </LabelInputContainer> */}
+
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
@@ -85,9 +60,8 @@ export default function Form(): JSX.Element {
           <BottomGradient />
         </button>
 
-        {/* <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" /> */}
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       </form>
-    </div>
     </div>
   );
 }
@@ -114,3 +88,4 @@ const LabelInputContainer = ({
     </div>
   );
 };
+
