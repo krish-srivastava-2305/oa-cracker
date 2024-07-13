@@ -23,8 +23,8 @@ export const POST = async (req: NextRequest)=>{
         data: {
           language_id: langID,
           source_code: btoa(sourceCode),
-          stdin: btoa(inputAndOutput[0]),
-          expected_output: btoa(inputAndOutput[1])
+          stdin: btoa(inputAndOutput[2]),
+          expected_output: btoa(inputAndOutput[3])
         }
       };
     try {

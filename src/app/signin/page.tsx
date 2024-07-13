@@ -23,9 +23,9 @@ export default function Form(): JSX.Element {
     e.preventDefault();
     try {
       const res = await axios.post("/api/users/signin",userData);
-      router.push('/')
+      router.push('/problem-setter')
     } catch (error) {
-      console.error("Sign-up failed:", error);
+      console.error("Sign-In failed:", error);
     }
   };
 
