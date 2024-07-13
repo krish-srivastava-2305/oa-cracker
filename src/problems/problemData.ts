@@ -46,7 +46,7 @@ export const problems: Array<problem> = [
         id: "6",
         statement: "Search in Rotated Sorted Array",
         description: "Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand. You are given a target value to search. If found in the array return its index, otherwise return -1.",
-        input: "2\n7\n4 5 6 7 0 1 2\n0\n7\n4 5 6 7 0 1 2\n3\n",
+        input: `2\n7\n4 5 6 7 0 1 2\n0\n7\n4 5 6 7 0 1 2\n3\n`,
         output: "4\n-1\n",
     },
     {
