@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
 
 type userDataObject = {
   username: string;
@@ -12,6 +13,24 @@ type userDataObject = {
 };
 
 export default function Form(): JSX.Element {
+
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+  const cookieStore = useCookies();
+
+  useEffect(() => {
+    // Check if token exists in cookies
+    // cookieStore.get('')
+    // if (cookieStore.get('token')) {
+    //   console.log(cookieStore.get('token'))
+    //   console.log(isSignedIn)
+    //   setIsSignedIn(true);
+    // } else {
+    //   setIsSignedIn(false);
+    // }
+    const cookies = document.cookie
+    console.log(cookies)
+  }, [cookieStore]); // Update state when cookies change
+
   const [userData, setUserData] = useState<userDataObject>({
     username: "",
     password: ""

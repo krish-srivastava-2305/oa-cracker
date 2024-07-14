@@ -1,27 +1,36 @@
 "use client";
-import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
+import React, { useEffect, useState } from "react";
+import { HoveredLink, Menu } from "./ui/navbar-menu";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const  [isSignedIn, setSignedIn] = useState<boolean>(false);
+  useEffect(()=>{
+    const url = window.location.href
+    if(url[url.length - 1] === 'r') setSignedIn(true)
+  })
+
   return (
-    <div className="relative w-fullflex items-center justify-center">
-      <NavbarM className="top-2" />
+    <div className="relative w-full flex items-center justify-center">
+      <NavbarMenu className="top-2" isSignedIn={isSignedIn} />
     </div>
   );
 }
 
-function NavbarM({ className }: { className?: string }) {
+function NavbarMenu({ className, isSignedIn }: { className?: string; isSignedIn?: boolean }) {
   const [active, setActive] = useState<string | null>(null);
+
   return (
-    <div
-      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 flex justify-center items-center", className)}
-    >
+    <div className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 flex justify-center items-center", className)}>
       <Menu setActive={setActive}>
         <HoveredLink href="/">Home</HoveredLink>
-        <HoveredLink href="/signin">SignIn</HoveredLink>
-        <HoveredLink href="/signup">SignUp</HoveredLink>
+        <HoveredLink href={isSignedIn ? "/signout" : "/signin"}>
+          {isSignedIn ? "Sign Out" : "Sign In"}
+        </HoveredLink>
+        <HoveredLink href="/signup">Sign Up</HoveredLink>
       </Menu>
     </div>
   );
 }
+
+export default Navbar;
