@@ -9,6 +9,7 @@ function page() {
         const signOut = async ()=>{
             try {
                 const res = await axios.get('/api/users/signout')
+                localStorage.clear()
                 router.push("/")
             } catch (error) {
                 console.error("some error occured: ", error)

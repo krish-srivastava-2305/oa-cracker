@@ -18,8 +18,6 @@ export function middleware(request: NextRequest) {
   }
     
 }
-
- 
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
@@ -27,5 +25,6 @@ export const config = {
     '/problem-setter',
     '/signin',
     '/signup',
+    `/problem-setter/:path*`
   ]
 }

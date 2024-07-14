@@ -1,6 +1,6 @@
 'use client';
 import { problems } from '@/problems/problemData';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Editor from '@monaco-editor/react';
 import axios from "axios";
 import { boilerPlateCodeCPP, boilerPlateCodePython, boilerPlateCodeJava } from '@/helper/boiler-plate';
@@ -42,6 +42,8 @@ function Page() {
     java: "67"
   };
 
+  const [firstLoad, setFirstLoad] = useState<boolean>(true) 
+
   useEffect(() => {
     setCode(prevCode);
     setLangID(Number(prevLangId));
@@ -49,6 +51,11 @@ function Page() {
   }, []);
 
   useEffect(() => {
+    if (firstLoad) {
+      setFirstLoad(false)
+      return
+    }
+
     if (selectedLanguage === "cpp") {
       setCode(boilerPlateCodeCPP);
       setPrevCode(boilerPlateCodeCPP);
@@ -71,7 +78,7 @@ function Page() {
   useEffect(() => {
     const url = window.location.href;
     let id;
-    if(url[url.length - 3] === '/') {
+    if (url[url.length - 3] === '/') {
       id = url[url.length - 2] + url[url.length - 1];
     } else {
       id = (url[url.length - 1]);

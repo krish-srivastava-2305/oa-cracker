@@ -5,19 +5,24 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const  [isSignedIn, setSignedIn] = useState<boolean>(false);
+  const [signOut, setSignOut] = useState<string>('SignIn')
+  const [url, setUrl] = useState<string>('')
   useEffect(()=>{
-    const url = window.location.href
-    if(url[url.length - 1] === 'r') setSignedIn(true)
-  })
+    setUrl(window.location.href)
+    if(url[url.length - 1] === 'r') {
+      setSignedIn(true)
+      setSignOut('SignOut')
+    }
+  },[url,isSignedIn,signOut])
 
   return (
     <div className="relative w-full flex items-center justify-center">
-      <NavbarMenu className="top-2" isSignedIn={isSignedIn} />
+      <NavbarMenu className="top-2" isSignedIn={isSignedIn} signOut={signOut} />
     </div>
   );
 }
 
-function NavbarMenu({ className, isSignedIn }: { className?: string; isSignedIn?: boolean }) {
+function NavbarMenu({ className, isSignedIn, signOut }: { className?: string; isSignedIn?: boolean, signOut?: string }) {
   const [active, setActive] = useState<string | null>(null);
 
   return (
@@ -25,7 +30,7 @@ function NavbarMenu({ className, isSignedIn }: { className?: string; isSignedIn?
       <Menu setActive={setActive}>
         <HoveredLink href="/">Home</HoveredLink>
         <HoveredLink href={isSignedIn ? "/signout" : "/signin"}>
-          {isSignedIn ? "Sign Out" : "Sign In"}
+          {signOut}
         </HoveredLink>
         <HoveredLink href="/signup">Sign Up</HoveredLink>
       </Menu>
