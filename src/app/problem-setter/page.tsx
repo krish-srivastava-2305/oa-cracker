@@ -41,7 +41,7 @@ function Page() {
     <div className="h-full w-full flex justify-center items-center flex-col gap-8">
       <div className='flex flex-col justify-center gap-6'>
         <p className='text-2xl font-bold'>Enter Number Of Questions: </p>
-        <input className="rounded-lg bg-slate-700 text-white p-2 hover:bg-slate-500" type="number" placeholder='5' onChange={handleInputChange} value={numOfQues} />
+        <input className="rounded-lg bg-slate-700 text-white p-2 hover:bg-slate-" type="number" placeholder='5' onChange={handleInputChange} value={numOfQues} />
       </div>
       <div className='bg-black rounded-2xl w-1/3'>
         {ques.map((question) => (
