@@ -3,17 +3,10 @@ import React, { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import axios from "axios"
 
 export default function Form() : React.ReactNode {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e)
-    useEffect(()=>{
-        const signUp = async () => {
-            // const res = await axios.post("/api/users/signup", {})
-        }
-    },[])
   };
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-gray-950 dark:bg-white">
