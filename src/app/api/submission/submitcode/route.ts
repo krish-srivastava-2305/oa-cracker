@@ -1,11 +1,8 @@
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
-import { problemFinder } from '@/helper/problemFinder';
 
 export const POST = async (req: NextRequest)=>{
-    const {sourceCode, langID, problemId} = await req.json()
-
-    const inputAndOutput = problemFinder(problemId)
+    const {sourceCode, langID, input, output} = await req.json()
 
     const options = {
         method: 'POST',
@@ -23,8 +20,8 @@ export const POST = async (req: NextRequest)=>{
         data: {
           language_id: langID,
           source_code: btoa(sourceCode),
-          stdin: btoa(inputAndOutput[2]),
-          expected_output: btoa(inputAndOutput[3])
+          stdin: btoa(input),
+          expected_output: btoa(output)
         }
       };
     try {

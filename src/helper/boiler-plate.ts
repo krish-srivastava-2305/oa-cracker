@@ -16,3 +16,21 @@ while t > 0
 
     t -= 1
 `
+
+export const boilerPlateCodeJava = `import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of times to print 'Hello, World!': ");
+        int t = scanner.nextInt();
+        
+        while (t > 0) {
+            System.out.println("Hello, World!");
+            t--;
+        }
+        
+        scanner.close();
+    }
+}
+`
