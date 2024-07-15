@@ -8,7 +8,7 @@ export async function POST(req: NextRequest){
     try {
         const {username, email, password} = await req.json()
 
-        const user = await UserModel.findOne({$or:[{email}, {username}]})
+        const user = await UserModel.findOne({username})
 
         if(user){
             return NextResponse.json({error: "User already exists"}, {status: 400})
