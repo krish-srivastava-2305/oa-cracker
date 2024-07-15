@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast, {Toaster} from "react-hot-toast"
 
 type userDataObject = {
   username: string;
@@ -26,14 +27,17 @@ export default function Form(): JSX.Element {
     e.preventDefault();
     try {
       const res = await axios.post("/api/users/signin",userData);
+      toast.success("Signed-In")
       router.push('/problem-setter')
     } catch (error) {
+      toast.error("Error in Details")
       console.error("Sign-In failed:", error);
     }
   };
 
   return (
     <div className="h-full w-full flex justify-center items-end py-16">
+      <Toaster />
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-gray-950 dark:bg-white">
       <h2 className="font-bold text-xl text-white dark:text-black">
         Welcome to OA Cracker

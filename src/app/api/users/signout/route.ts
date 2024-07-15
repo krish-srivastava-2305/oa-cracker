@@ -9,7 +9,7 @@ export async function GET() {
                 success: true,
             }
         )
-        response.cookies.delete('token').delete('codeCookie');
+        response.cookies.delete('token').delete('codeCookie')
         return response;
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

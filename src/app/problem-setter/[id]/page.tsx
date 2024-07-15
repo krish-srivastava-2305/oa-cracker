@@ -5,6 +5,7 @@ import Editor from '@monaco-editor/react';
 import axios from "axios";
 import { boilerPlateCodeCPP, boilerPlateCodePython, boilerPlateCodeJava } from '@/helper/boiler-plate';
 import useLocalStorage from '@/hooks/useLocalStorage';
+import toast, {Toaster} from "react-hot-toast"
 
 type Problem = {
   id: string,
@@ -105,17 +106,26 @@ function Page() {
       setTimeout(async () => {
         const newRes = await axios.get("/api/submission/evaluation");
         setOutput(String(newRes.data.status.description));
+        if(res.data.status.description === 'Accepted') toast.success("Code Accepted")
+        if(res.data.status.description === 'Compilation Error') toast.error("Compilation Error")
+        if(res.data.status.description === 'Runtime Error (NZEC)')toast.error("Runtime Error")
         setCompiledOutput(atob(newRes.data.compile_output) || "No compile output");
       }, 3000);
       setOutput(String(res.data.status.description));
+      if(res.data.status.description === 'Accepted') toast.success("Code Accepted")
+      if(res.data.status.description === 'Compilation Error') toast.error("Compilation Error")
+      if(res.data.status.description === 'Runtime Error (NZEC)')toast.error("Runtime Error")
       setCompiledOutput(atob(res.data.compile_output) || "No compile output");
+      toast
     } catch (error) {
+      toast.error(String(error))
       setOutput(String(error));
     }
   };
 
   return (
     <div className='h-full w-full bg-black flex justify-center items-center'>
+      <Toaster />
       <div className='h-full w-[50%] p-5 border-r-2 border-white flex flex-col justify-center items-center gap-10'>
         <h1 className='font-bold text-4xl text-gray-300 px-5'>{statement}</h1>
         <h3 className='font-basic text-lg text-gray-300 px-10'>{description}</h3>
