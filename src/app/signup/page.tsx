@@ -31,7 +31,7 @@ export default function Form(): JSX.Element {
         router.push('/signin')
       }
     } catch (error) {
-      toast.error("Incorrect Information")
+      toast.error("Username already taken")
       console.error("", error);
     }
   };

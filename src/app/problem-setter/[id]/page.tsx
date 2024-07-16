@@ -106,17 +106,18 @@ function Page() {
       setTimeout(async () => {
         const newRes = await axios.get("/api/submission/evaluation");
         setOutput(String(newRes.data.status.description));
-        if(res.data.status.description === 'Accepted') toast.success("Code Accepted")
-        if(res.data.status.description === 'Compilation Error') toast.error("Compilation Error")
-        if(res.data.status.description === 'Runtime Error (NZEC)')toast.error("Runtime Error")
+        if(newRes.data.status.description === 'Accepted') toast.success("Code Accepted")
+        if(newRes.data.status.description === 'Wrong Answer') toast.error("1 or more test cases failed!")
+        if(newRes.data.status.description === 'Compilation Error') toast.error("Compilation Error")
+        if(newRes.data.status.description === 'Runtime Error (NZEC)')toast.error("Runtime Error")
         setCompiledOutput(atob(newRes.data.compile_output) || "No compile output");
       }, 3000);
       setOutput(String(res.data.status.description));
       if(res.data.status.description === 'Accepted') toast.success("Code Accepted")
+        if(res.data.status.description === 'Wrong Answer') toast.error("1 or more test cases failed!")
       if(res.data.status.description === 'Compilation Error') toast.error("Compilation Error")
       if(res.data.status.description === 'Runtime Error (NZEC)')toast.error("Runtime Error")
       setCompiledOutput(atob(res.data.compile_output) || "No compile output");
-      toast
     } catch (error) {
       toast.error(String(error))
       setOutput(String(error));
