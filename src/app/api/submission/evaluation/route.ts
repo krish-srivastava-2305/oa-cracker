@@ -2,7 +2,6 @@ import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest) => {
-    // Access the cookie named "codeCookie"
     const codeCookie = req.cookies.get('codeCookie')?.value;
 
     if (!codeCookie) {
@@ -17,8 +16,8 @@ export const GET = async (req: NextRequest) => {
             fields: '*'
         },
         headers: {
-            'x-rapidapi-key': 'c5c57be0c7msh7d7717368a4f95ep15bfe9jsn336ccb278c56',
-            'x-rapidapi-host': 'judge0-ce.p.rapidapi.com'
+            'x-rapidapi-key': process.env.X_RAPID_KEY!,
+            'x-rapidapi-host': process.env.X_RAPID_HOST!,
         }
     };
 
